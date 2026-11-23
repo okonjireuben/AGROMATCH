@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REUBEN TECH — Discover What's Next.</title>
+  
+  <!-- Allowlisted Tailwind Script -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Outfit', 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --bg-main: #101426;
+      --bg-surface: #151B33;
+      --bg-surface-elevated: #1B2342;
+      --bg-card: rgba(21, 27, 51, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(0, 217, 255, 0.25);
+      --text-primary: #FFFFFF;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      
+      --color-electric-blue: #287BFF;
+      --color-vibrant-purple: #873CFF;
+      --color-neon-cyan: #00D9FF;
+      --color-bright-orange: #FF7138;
+      
+      --glow-blue: 0 0 35px rgba(40, 123, 255, 0.35);
+      --glow-cyan: 0 0 35px rgba(0, 217, 255, 0.35);
+      --glow-purple: 0 0 35px rgba(135, 60, 255, 0.35);
+      --glow-orange: 0 0 35px rgba(255, 113, 56, 0.35);
+      --gradient-brand: linear-gradient(135deg, #287BFF 0%, #873CFF 50%, #00D9FF 100%);
+      --gradient-fire: linear-gradient(135deg, #FF7138 0%, #873CFF 100%);
+      --gradient-cyan-blue: linear-gradient(135deg, #00D9FF 0%, #287BFF 100%);
+    }
+
+    html.light {
+      --bg-main: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F1F5F9;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --border-subtle: rgba(15, 23, 42, 0.09);
+      --border-highlight: rgba(40, 123, 255, 0.3);
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: rgba(40, 123, 255, 0.35); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-electric-blue); }
+
+    h1, h2, h3, h4, h5, h6, .font-display {
+      font-family: var(--font-display);
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+    .font-mono { font-family: var(--font-mono); }
+
+    .gradient-text {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-fire {
+      background: var(--gradient-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-cyan {
+      background: var(--gradient-cyan-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .glass-panel:hover { border-color: var(--border-highlight); }
+
+    .glass-nav {
+      background: rgba(16, 20, 38, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    html.light .glass-nav {
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    html.light .cyber-grid {
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      opacity: 0.45;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.15); }
+      100% { transform: translate(-30px, 40px) scale(0.95); }
+    }
+
+    .hover-card {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+    .hover-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(40, 123, 255, 0.2);
+      border-color: rgba(40, 123, 255, 0.4);
+    }
+
+    .btn-shimmer {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transform: rotate(30deg) translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-shimmer:hover::after {
+      transform: rotate(30deg) translateX(100%);
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-enter {
+      opacity: 0;
+      transform: scale(0.96) translateY(10px);
+      animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalIn {
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .article-body {
+      font-size: 1.125rem;
+      line-height: 1.85;
+      color: var(--text-secondary);
+    }
+    .article-body p { margin-bottom: 1.5rem; }
+    .article-body .lead {
+      font-size: 1.35rem;
+      line-height: 1.7;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .article-body h3 {
+      font-size: 1.75rem;
+      color: var(--text-primary);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .article-body blockquote {
+      border-left: 4px solid var(--color-electric-blue);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background: rgba(40, 123, 255, 0.08);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    @keyframes audioWave {
+      0%, 100% { height: 6px; }
+      50% { height: 24px; }
+    }
+    .audio-bar {
+      width: 3px;
+      background: var(--color-neon-cyan);
+      border-radius: 2px;
+      animation: audioWave 1.2s ease-in-out infinite;
+    }
+    .audio-bar:nth-child(2) { animation-delay: 0.2s; }
+    .audio-bar:nth-child(3) { animation-delay: 0.4s; }
+    .audio-bar:nth-child(4) { animation-delay: 0.6s; }
+    .audio-bar:nth-child(5) { animation-delay: 0.1s; }
+  </style>
+</head>
+<body class="bg-[#101426] text-white selection:bg-[#00D9FF]/30 selection:text-white">
+
+  <!-- Interactive Platform Container -->
+  <div id="app"></div>
+
+  <!-- Embedded Single-File Script Bundle -->
+  <script>
+    // Embedded Data Store
+    const BRAND = {
+      name: "REUBEN TECH",
+      tagline: "Discover What's Next.",
+      motto: "The Future is Happening Now.",
+      established: 2026,
+      description: "A premier international technology media and discovery platform exploring the innovations, technologies, and ideas transforming our world."
+    };
+
+    const TRENDING_TOPICS = [
+      { tag: "#QuantumSupremacy", label: "Quantum Error Correction", count: "142k reads", growth: "+84%", category: "Deep Tech" },
+      { tag: "#GPT5Architectures", label: "Autonomous Reasoning Models", count: "318k reads", growth: "+142%", category: "AI" },
+      { tag: "#HumanoidRobotics", label: "Next-Gen Bipedal Automations", count: "89k reads", growth: "+56%", category: "Robotics" },
+      { tag: "#SolidStateBatteries", label: "1000Wh/L Energy Breakthrough", count: "194k reads", growth: "+92%", category: "Energy" },
+      { tag: "#WiFi7Adoption", label: "320MHz Ultra-Wide Channels", count: "76k reads", growth: "+38%", category: "Networking" },
+      { tag: "#SiliconPhotonicChips", label: "Light-Speed Optical Interconnects", count: "115k reads", growth: "+67%", category: "Hardware" }
+    ];
+
+    const ARTICLES = [
+      {
+        id: "art-1",
+        title: "Silicon Photonics Breakthrough: Microchips That Compute with Light, Not Electricity",
+        subtitle: "How optical interconnects are breaking Moore's Law physical thermal limits and slashing data center energy demands by 80%.",
+        category: "AI & Innovation",
+        readTime: "7 min read",
+        date: "Nov 02, 2026",
+        author: {
+          name: "Dr. Elena Vance",
+          role: "Lead Hardware Fellow",
+          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+        },
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Silicon Photonics", "Semiconductors", "Deep Tech", "Energy"],
+        summary: "For decades, chip architects fought copper resistance. Today, optical transceivers embedded into silicon substrates route petabytes of tensor mathematics using photons at room temperature.",
+        isFeatured: true,
+        isHero: true,
+        isTrending: true,
+        isEditorsPick: true,
+        views: 48920,
+        likes: 3412,
+        takeaways: [
+          "Photonic interconnects reduce intra-chip latency to sub-picosecond boundaries.",
+          "Energy dissipation is slashed by up to 80% compared to high-frequency copper traces.",
+          "Commercial wafer production has begun across 300mm standard CMOS manufacturing fabs.",
+          "First deployment targets hyperscale AI training clusters where memory bandwidth is the primary bottleneck."
+        ],
+        content: `
+          <p class="lead">For nearly four decades, silicon engineering lived in the comforting certainty of Moore’s Law and Dennard scaling. But in recent years, every silicon architect has confronted the immovable wall of thermodynamics: electrons moving through nanoscale copper traces generate heat, suffer parasitic capacitance, and throttle multi-die interconnect speeds.</p>
+          <p>Today marks the turning point. In an exhaustive research milestone validated across three tier-one semiconductor foundries, researchers have successfully co-packaged continuous-wave lasers directly alongside sub-2nm compute dies, executing optical tensor mathematics with zero copper parasitic drag.</p>
+          <blockquote>"We are no longer transmitting electrical voltages down microscopic copper highways. We are routing modulated photons of light directly into optical waveguides etched into the silicon itself." — Dr. Marcus Sterling, MIT Photonic Laboratory</blockquote>
+          <h3>The Physics of Optical Interconnects</h3>
+          <p>Traditional high-performance compute clusters spend as much as 45% of their total thermal design power (TDP) simply shuffling data between memory stacks and processing cores (the infamous 'Memory Wall'). By swapping electrical transceivers for wavelength-division multiplexing (WDM) micro-ring resonators, data transfer speeds skyrocket to over 100 Terabits per second per square millimeter of die surface.</p>
+        `
+      },
+      {
+        id: "art-2",
+        title: "Autonomous Bipedal Robotics Enter the Assembly Line: The 2026 Field Test Report",
+        subtitle: "Inside the automated gigafactories where vision-language-action (VLA) humanoids are taking over high-mix logistics.",
+        category: "AI & Innovation",
+        readTime: "6 min read",
+        date: "Nov 01, 2026",
+        author: {
+          name: "Julian Rivera",
+          role: "Robotics & Automation Editor",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+        },
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Robotics", "Humanoids", "VLA Models", "Industrial AI"],
+        summary: "We spent 72 hours inside one of the world's first fully human-robot co-working facilities. Here is how end-to-end neural locomotion and tactile sensory hands handle fragile assembly tasks.",
+        isFeatured: true,
+        isTrending: true,
+        isEditorsPick: false,
+        views: 34100,
+        likes: 2190,
+        takeaways: [
+          "Vision-Language-Action (VLA) models allow zero-shot task adaptation without hardcoded trajectory scripts.",
+          "Harmonic gear actuators have given way to quasi-direct-drive brushless motors with high torque density.",
+          "Tactile fingertip sensor arrays read 400 pressure points per square centimeter at 1kHz polling rates.",
+          "Battery life has stabilized at 6 to 8 continuous operational hours per rapid hot-swap cycle."
+        ],
+        content: `
+          <p class="lead">Stand in the observation gallery of the automotive electronics plant in Stuttgart, and what strikes you first is the rhythmic cadence of humanoid footsteps.</p>
+          <p>Over the past eighteen months, general-purpose bipedal robotics shifted from laboratory demonstration reels to active production shifts. Unlike legacy robotic arms bolted to caged pedestals, these 5-foot-9 machines navigate warehouse aisles, unbox irregular shipments, and place delicate wire harnesses into automotive chassis.</p>
+        `
+      },
+      {
+        id: "art-3",
+        title: "Quantum Error Correction Reaches Commercial Viability: The 1,000 Logical Qubit Era",
+        subtitle: "Surface codes, neutral atom traps, and cat qubits overcome decoherence to perform fault-tolerant chemical simulations.",
+        category: "AI & Innovation",
+        readTime: "9 min read",
+        date: "Oct 30, 2026",
+        author: {
+          name: "Dr. Aris Thorne",
+          role: "Quantum Physics Contributor",
+          avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+        },
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Quantum", "Neutral Atoms", "Cryptography", "Physics"],
+        summary: "Decoherence was the boogeyman of quantum computing for thirty years. Through topological braiding and 3D neutral-atom optical tweezers, logical qubits now live 10,000 times longer than physical ones.",
+        isFeatured: false,
+        isTrending: true,
+        isEditorsPick: true,
+        views: 28940,
+        likes: 1845,
+        takeaways: [
+          "Neutral atom arrays in optical lattices reach 99.95% two-qubit gate fidelities.",
+          "Logical qubit coherence times now exceed 45 minutes under continuous active syndrome extraction.",
+          "First production milestone: Exact ground-state electronic simulation of the nitrogenase FeMoco cofactor.",
+          "Post-quantum cryptography migration deadlines are accelerating worldwide."
+        ],
+        content: `
+          <p class="lead">Quantum computing has survived its trough of disillusionment. For years, skeptics pointed to noisy intermediate-scale quantum (NISQ) systems as computational dead-ends: prone to cosmic ray errors, thermal noise, and drift.</p>
+          <p>That era ended with fault-tolerant systems demonstrating over 1,000 error-corrected logical qubits operating stably above threshold fidelity.</p>
+        `
+      },
+      {
+        id: "art-4",
+        title: "The Ultimate 2026 Smartphone Flagship Showdown: Titanium, Periscopes, and Local 20B LLMs",
+        subtitle: "We tested the iPhone 16 Pro Max, Samsung Galaxy S25 Ultra, and Pixel 9 Pro through 500 hours of real-world endurance.",
+        category: "Gadgets",
+        readTime: "8 min read",
+        date: "Oct 28, 2026",
+        author: {
+          name: "Maya Lin",
+          role: "Senior Mobile Hardware Analyst",
+          avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
+        },
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Smartphones", "Apple", "Samsung", "Google", "Hardware"],
+        summary: "Flagship smartphones are now portable NPU powerhouses capable of running quantized 20-billion parameter neural models completely in memory while recording 8K ProRes LOG footage.",
+        isFeatured: true,
+        isTrending: true,
+        isEditorsPick: false,
+        views: 62400,
+        likes: 4120,
+        takeaways: [
+          "On-device neural processing units (NPUs) now exceed 60 TOPS at under 4 watts.",
+          "Variable aperture 1-inch sensor main cameras have virtually eliminated computational bokeh artifacts.",
+          "Silicon-carbon anode batteries pack 5,500mAh into sub-8.2mm chassis profiles.",
+          "Anti-reflective nano-etched glass displays deliver 3,200 nits peak outdoor brightness."
+        ],
+        content: `
+          <p class="lead">The 2026 flagship crop represents the most decisive technological leap since the transition to 5G. Rather than marginal clock boosts, modern flagships integrate dedicated neural engines capable of running full multimodal vision models on-device.</p>
+        `
+      }
+    ];
+
+    const GADGETS = [
+      {
+        id: "gadget-1",
+        name: "Apple iPhone 16 Pro Max",
+        brand: "Apple",
+        category: "Smartphones",
+        price: "$1,199",
+        rating: 9.6,
+        verdict: "The absolute benchmark for mobile videography, battery endurance, and thermal stability in a premium titanium enclosure.",
+        highlightBadge: "Best Overall Flagship",
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+        pros: [
+          "Unmatched 4K 120fps Dolby Vision video recording with full ProRes LOG",
+          "Industry-leading 33-hour battery life with A18 Pro 3nm efficiency",
+          "Grade 5 titanium chassis feels significantly lighter in hand",
+          "Brilliant 2,000-nit Super Retina XDR display with uniform razor-thin bezels"
+        ],
+        cons: [
+          "Charging speed still capped at 30W wired compared to Android rivals",
+          "Camera control capacitive button requires slight muscle-memory adaptation",
+          "High price tag for upper storage tiers (512GB & 1TB)"
+        ],
+        specs: {
+          display: "6.9-inch LTPO Super Retina XDR OLED, 120Hz ProMotion, 2000 nits",
+          processor: "Apple A18 Pro (3nm, 6-core CPU, 6-core GPU, 16-core NPU)",
+          ram: "8GB LPDDR5X unified",
+          storage: "256GB / 512GB / 1TB NVMe",
+          battery: "4,685 mAh (Up to 33 hours continuous video playback)",
+          camera: "Triple: 48MP Main + 48MP Ultra-Wide + 12MP 5x Tetraprism Periscope",
+          weight: "227g (8.01 oz)",
+          os: "iOS 18 (Apple Intelligence Native)"
+        }
+      },
+      {
+        id: "gadget-2",
+        name: "Samsung Galaxy S25 Ultra",
+        brand: "Samsung",
+        category: "Smartphones",
+        price: "$1,299",
+        rating: 9.5,
+        verdict: "The ultimate do-everything productivity flagship with unmatched zoom flexibility, integrated S-Pen, and flat anti-reflective display.",
+        highlightBadge: "Best Productivity Phone",
+        image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80",
+        pros: [
+          "Gorilla Glass Armor completely eliminates harsh reflections and glare",
+          "Integrated S-Pen stylus with sub-2.8ms pen latency",
+          "Unrivaled 200MP sensor with 5x and 10x periscope telephoto reach",
+          "7 full years of certified Android and One UI OS upgrades"
+        ],
+        cons: [
+          "Bulky squared-off corners can feel sharp during one-handed use",
+          "Shutter lag on rapid indoor moving pets still noticeable vs Pixel",
+          "Premium price starting at $1,299"
+        ],
+        specs: {
+          display: "6.8-inch Dynamic LTPO AMOLED 2X, 1-120Hz, 2600 nits, Anti-Reflective Armor",
+          processor: "Qualcomm Snapdragon 8 Elite for Galaxy (3nm Oryon CPU, Adreno 830)",
+          ram: "12GB / 16GB LPDDR5X",
+          storage: "256GB / 512GB / 1TB UFS 4.0",
+          battery: "5,000 mAh (45W fast wired, 15W Qi2 wireless)",
+          camera: "Quad: 200MP Main + 50MP 5x Periscope + 10MP 3x Telephoto + 50MP Ultra-Wide",
+          weight: "232g (8.18 oz)",
+          os: "Android 15 with One UI 7"
+        }
+      },
+      {
+        id: "gadget-4",
+        name: "Apple MacBook Pro 16\" (M4 Max)",
+        brand: "Apple",
+        category: "Laptops",
+        price: "$3,499",
+        rating: 9.8,
+        verdict: "A computational titan that delivers workstation-tier 3D rendering and local LLM execution with whisper-quiet fans and 22-hour battery life.",
+        highlightBadge: "Editor's Ultimate Workstation",
+        image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
+        pros: [
+          "M4 Max delivers up to 16 CPU cores and 40 GPU cores with up to 128GB unified RAM",
+          "Runs full load on battery with zero performance throttling",
+          "Liquid Retina XDR Mini-LED display with nano-texture anti-glare option",
+          "Best built-in laptop speakers, trackpad, and microphones on the market"
+        ],
+        cons: [
+          "Extremely expensive when upgraded with maximum memory and storage",
+          "Substantial 4.7 lb chassis requires a sturdy backpack",
+          "Not designed for native Windows-only directX games"
+        ],
+        specs: {
+          display: "16.2-inch Liquid Retina XDR Mini-LED, 3456x2234, 1600 nits HDR, 120Hz ProMotion",
+          processor: "Apple M4 Max (16-core CPU, 40-core GPU, 546 GB/s memory bandwidth)",
+          ram: "36GB / 48GB / 64GB / 128GB Unified Memory",
+          storage: "1TB / 2TB / 4TB / 8TB PCIe Gen4 SSD",
+          battery: "100Wh (Up to 24 hours video playback, 140W MagSafe 3)",
+          camera: "12MP Center Stage camera with Desk View support",
+          weight: "2.16 kg (4.76 lbs)",
+          os: "macOS Sequoia"
+        }
+      },
+      {
+        id: "gadget-6",
+        name: "Valve Steam Deck OLED",
+        brand: "Valve",
+        category: "Gaming devices",
+        price: "$549",
+        rating: 9.7,
+        verdict: "The absolute pinnacle of portable PC gaming with an intoxicating 90Hz HDR OLED screen and peerless ergonomics.",
+        highlightBadge: "Best Value Gaming Device",
+        image: "https://images.unsplash.com/photo-1612287233215-9988229b110a?auto=format&fit=crop&w=800&q=80",
+        pros: [
+          "Deep blacks, 1,000-nit HDR highlights, and 90Hz motion clarity",
+          "50Wh battery delivers 30-50% longer play sessions than original Deck",
+          "SteamOS sleep/resume function works flawlessly mid-gameplay",
+          "Dual responsive trackpads provide precision mouse simulation"
+        ],
+        cons: [
+          "Cannot run games requiring kernel-level anti-cheat (e.g. Valorant)",
+          "Larger overall footprint than Nintendo Switch",
+          "7.4-inch display resolution is 1280x800, not 1080p"
+        ],
+        specs: {
+          display: "7.4-inch HDR OLED, 1280x800, 90Hz, 1,000 nits peak, sub-0.1ms response",
+          processor: "Custom 6nm AMD 'Sephiroth' APU (4-core Zen 2 + 8 RDNA 2 CUs)",
+          ram: "16GB LPDDR5-6400 (Faster 50 GB/s bandwidth)",
+          storage: "512GB / 1TB NVMe SSD + High-speed UHS-I microSD card slot",
+          battery: "50Wh (3 to 12 hours depending on TDP limiter setting)",
+          camera: "None (Dedicated handheld gaming architecture)",
+          weight: "640g (1.41 lbs)",
+          os: "SteamOS 3.5 (Arch Linux based with Proton compatibility layer)"
+        }
+      }
+    ];
+
+    const AI_TOOLS = [
+      { id: "ai-1", name: "Claude 3.5 Sonnet", maker: "Anthropic", category: "LLMs & Reasoning", pricing: "Freemium ($20/mo)", rating: 4.9, description: "State-of-the-art reasoning, nuanced coding capability, and interactive Artifacts sandbox.", useCase: "Full-stack code synthesis, analytical writing.", link: "https://claude.ai", badge: "Top Coder" },
+      { id: "ai-2", name: "OpenAI GPT-4o", maker: "OpenAI", category: "LLMs & Reasoning", pricing: "Freemium ($20/mo)", rating: 4.8, description: "Omni-modal model natively processing audio, vision, and text in real time with conversational inflection.", useCase: "Multimodal analysis, real-time voice.", link: "https://chatgpt.com", badge: "Most Versatile" },
+      { id: "ai-4", name: "Cursor AI", maker: "Anysphere", category: "Code Assistants", pricing: "Freemium ($20/mo)", rating: 4.9, description: "AI-first IDE with codebase-wide semantic search and multi-file diff generation.", useCase: "Accelerating software engineering.", link: "https://cursor.com", badge: "Essential Dev Tool" }
+    ];
+
+    const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        question: "What primary bottleneck does Silicon Photonics solve in modern computing clusters?",
+        options: [
+          "Display resolution limits in consumer VR headsets",
+          "Thermal dissipation and resistance of copper interconnects between dies",
+          "Slow mechanical hard drive rotational speeds",
+          "Radio frequency interference in Bluetooth 5.0"
+        ],
+        correctAnswer: 1,
+        explanation: "As transistor gates shrink below 2nm, electrical copper wires generate enormous heat and latency. Silicon photonics replaces copper wires with microscopic optical waveguides, moving data with light."
+      },
+      {
+        id: 2,
+        question: "What revolutionary capability does Wi-Fi 7's 'Multi-Link Operation' (MLO) provide?",
+        options: [
+          "Increases router range to over 5 kilometers",
+          "Allows a device to transmit and receive across multiple radio frequency bands simultaneously",
+          "Replaces fiber optic cables with satellite radio links",
+          "Encrypts network traffic using quantum entanglement"
+        ],
+        correctAnswer: 1,
+        explanation: "MLO enables compatible devices to send and receive data packets across 2.4 GHz, 5 GHz, and 6 GHz bands simultaneously, slashing latency and jitter."
+      }
+    ];
+
+    const EXPLAINERS = [
+      {
+        id: "exp-1",
+        title: "What is Quantum Computing?",
+        badge: "Quantum Physics",
+        eli5: "Normal computers think in light switches that are strictly ON (1) or OFF (0). A quantum computer uses atomic particles that can be ON, OFF, or both at the same time (Superposition). It's like flipping a coin in the air—while it's spinning, it explores all possibilities at once!",
+        deepDive: "Quantum computers exploit quantum mechanical principles: Superposition and Entanglement. Quantum bits (qubits) occupy linear combinations of orthogonal basis states |0⟩ and |1⟩. When entangled, an n-qubit system navigates an exponential 2^n dimensional Hilbert state space simultaneously.",
+        keyPoints: [
+          "Qubits can represent multiple probabilistic outcomes simultaneously.",
+          "Entanglement links qubits across space without physical wiring.",
+          "Excels at molecular simulations, materials discovery, and cryptography."
+        ]
+      },
+      {
+        id: "exp-2",
+        title: "How Transformers Power Modern Generative AI",
+        badge: "Neural Networks",
+        eli5: "Imagine reading a mystery book where every time you read a new word, you have magic highlighter pens that instantly link that word to every clue mentioned in previous chapters. That's Self-Attention! It helps the AI understand what words mean based on their entire surroundings.",
+        deepDive: "Introduced in 'Attention Is All You Need', Transformer architectures replace sequential recurrent loops (RNNs) with parallelized Self-Attention mechanisms: Attention(Q,K,V) = softmax(QK^T / √d_k)V.",
+        keyPoints: [
+          "Replaces slow step-by-step reading with lightning-fast parallel processing.",
+          "Self-Attention calculates the relational weight of every word to every other word.",
+          "Powers ChatGPT, Claude, Gemini, modern translation engines, and coding assistants."
+        ]
+      }
+    ];
+
+    // State
+    const state = {
+      theme: 'dark',
+      savedArticleIds: ['art-1'],
+      comparedGadgetIds: ['gadget-1', 'gadget-2'],
+      activeArticleId: null,
+      quizCurrentIndex: 0,
+      quizScore: 0
+    };
+
+    function renderNavbar() {
+      return `
+        <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+              
+              <!-- Logo -->
+              <a href="#/home" class="flex items-center gap-3 group focus:outline-none">
+                <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-[#287BFF] via-[#873CFF] to-[#00D9FF] p-[2px] shadow-lg shadow-[#287BFF]/25">
+                  <div class="w-full h-full bg-[#101426] rounded-[10px] flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#00D9FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M4 4h7a4 4 0 0 1 4 4 4 4 0 0 1-4 4H4z" />
+                      <path d="M4 12h8l5 8" />
+                      <circle cx="17" cy="6" r="2" fill="#FF7138" stroke="none" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-display font-black text-xl tracking-tight text-white">REUBEN<span class="text-[#00D9FF]">TECH</span></span>
+                  <span class="text-[9px] font-mono tracking-widest uppercase text-slate-400">${BRAND.tagline}</span>
+                </div>
+              </a>
+
+              <!-- Links -->
+              <nav class="hidden lg:flex items-center gap-2 text-sm font-medium">
+                <a href="#/home" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">Home</a>
+                <a href="#/news" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">News</a>
+                <a href="#/ai" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">AI & Innovation</a>
+                <a href="#/gadgets" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">Gadgets</a>
+                <a href="#/smartphones" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">Reviews</a>
+                <a href="#/tutorials" class="nav-link px-3 py-2 rounded-lg text-slate-300 hover:text-white">Tutorials</a>
+                <button id="btnOpenDiscover" class="px-3 py-2 rounded-lg text-slate-300 hover:text-[#00D9FF]">Discover</button>
+              </nav>
+
+              <!-- Actions -->
+              <div class="flex items-center gap-3">
+                <button id="btnOpenSearch" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white">
+                  <span>Search</span>
+                  <kbd class="hidden sm:inline bg-black/40 px-1.5 py-0.5 rounded text-[10px]">⌘K</kbd>
+                </button>
+                <button id="btnOpenReadingList" class="relative p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white" title="Reading List">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                  <span id="savedBadge" class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-[10px] font-bold text-white bg-gradient-to-r from-[#287BFF] to-[#873CFF] rounded-full">1</span>
+                </button>
+                <button id="btnToggleTheme" class="p-2.5 rounded-xl bg-white/5 border border-white/10 text-[#00D9FF]">
+                  ◑
+                </button>
+                <button id="btnHeaderNewsletter" class="hidden sm:inline-flex px-4 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-[#287BFF] via-[#873CFF] to-[#00D9FF] btn-shimmer">
+                  Stay Ahead
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderHero() {
+      return `
+        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden cyber-grid pt-12 pb-20">
+          <div class="orb w-[500px] h-[500px] bg-[#287BFF]/20 -top-24 -left-20"></div>
+          <div class="orb w-[500px] h-[500px] bg-[#873CFF]/20 -bottom-32 -right-20"></div>
+
+          <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+              <span class="w-2 h-2 rounded-full bg-[#00D9FF] animate-ping"></span>
+              <span class="text-xs font-mono font-semibold uppercase text-slate-300">REUBEN TECH INTEL FEED • NOV 2026 EDITION</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div class="lg:col-span-7 space-y-6">
+                <h1 class="text-4xl sm:text-6xl font-black text-white leading-tight">
+                  THE FUTURE IS <br /><span class="gradient-text">HAPPENING NOW.</span>
+                </h1>
+                <p class="text-lg text-slate-300 max-w-2xl">
+                  Explore the innovations, technologies and ideas transforming the world around us — from room-temperature silicon photonics to autonomous multi-agent intelligence.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                  <button class="btn-open-article px-7 py-4 rounded-2xl text-base font-bold text-white bg-gradient-to-r from-[#287BFF] via-[#873CFF] to-[#00D9FF] shadow-xl shadow-[#287BFF]/30 btn-shimmer" data-article-id="art-1">
+                    Read Featured Story →
+                  </button>
+                  <a href="#/gadgets" class="px-7 py-4 rounded-2xl text-base font-bold text-white bg-white/5 hover:bg-white/10 border border-white/15">
+                    Explore Technology
+                  </a>
+                </div>
+              </div>
+
+              <!-- Hero Featured Card -->
+              <div class="lg:col-span-5">
+                <div class="rounded-3xl glass-panel p-6 border border-white/15 hover-card">
+                  <div class="w-full h-64 rounded-2xl overflow-hidden mb-4 relative">
+                    <img src="${ARTICLES[0].image}" alt="${ARTICLES[0].title}" class="w-full h-full object-cover">
+                    <span class="absolute top-3 left-3 badge-pill bg-[#287BFF] text-white text-[10px]">WORLD EXCLUSIVE</span>
+                  </div>
+                  <div class="text-xs font-mono text-slate-400 mb-2">${ARTICLES[0].date} • ${ARTICLES[0].readTime}</div>
+                  <h3 class="text-xl font-bold text-white mb-2 leading-snug">${ARTICLES[0].title}</h3>
+                  <p class="text-xs text-slate-300 line-clamp-2 mb-4">${ARTICLES[0].subtitle}</p>
+                  <button class="btn-open-article text-xs font-bold text-[#00D9FF]" data-article-id="art-1">Read Full Story →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderTrending() {
+      return `
+        <section class="py-10 bg-[#0E1222] border-y border-white/10">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                TRENDING NOW <span class="text-xs font-mono text-slate-400">/ VELOCITY RADAR</span>
+              </h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              ${ARTICLES.map((art, idx) => `
+                <div class="rounded-2xl glass-panel p-4 border border-white/10 hover-card cursor-pointer btn-open-article" data-article-id="${art.id}">
+                  <div class="flex items-center justify-between text-xs font-mono text-[#00D9FF] mb-2">
+                    <span>#0${idx + 1}</span>
+                    <span class="text-emerald-400">+${80 + idx * 20}%</span>
+                  </div>
+                  <h4 class="text-sm font-bold text-white line-clamp-2 mb-1">${art.title}</h4>
+                  <span class="text-[10px] font-mono text-slate-400">${art.category} • ${art.readTime}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderGadgetDeck() {
+      return `
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/10 mb-8">
+            <div>
+              <div class="text-xs font-mono text-[#00D9FF] font-bold uppercase mb-1">HARDWARE LAB • INVENTORY</div>
+              <h2 class="text-3xl font-extrabold text-white">Gadget Discovery</h2>
+            </div>
+            <button id="btnLaunchCompareModal" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#873CFF] to-[#287BFF] text-xs font-bold text-white shadow-lg">
+              Open Comparison Matrix →
+            </button>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            ${GADGETS.map(g => `
+              <div class="rounded-3xl glass-panel p-5 border border-white/10 hover-card flex flex-col justify-between">
+                <div>
+                  <div class="w-full h-48 rounded-2xl overflow-hidden mb-4 relative bg-black/40">
+                    <img src="${g.image}" alt="${g.name}" class="w-full h-full object-cover">
+                    <span class="absolute top-2 left-2 badge-pill bg-[#287BFF] text-white text-[9px]">${g.highlightBadge}</span>
+                    <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-xs font-mono font-bold text-[#00D9FF]">${g.rating} / 10</span>
+                  </div>
+                  <div class="text-xs font-mono text-slate-400 mb-1">${g.brand} • ${g.price}</div>
+                  <h3 class="text-base font-bold text-white line-clamp-1 mb-2">${g.name}</h3>
+                  <p class="text-xs text-slate-300 line-clamp-2 mb-4">${g.verdict}</p>
+                </div>
+                <div class="pt-3 border-t border-white/10 flex gap-2">
+                  <button class="btn-open-gadget flex-1 py-2 rounded-xl bg-white/10 hover:bg-[#287BFF] text-xs font-bold text-white" data-gadget-id="${g.id}">Details</button>
+                  <button class="btn-add-compare px-3 py-2 rounded-xl bg-white/5 hover:bg-[#873CFF] text-xs text-white" data-gadget-id="${g.id}" title="Add to compare">+</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderFooter() {
+      return `
+        <footer class="bg-[#0B0E1B] border-t border-white/10 py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <div class="font-display font-black text-xl text-white">REUBEN<span class="text-[#00D9FF]">TECH</span></div>
+              <p class="text-xs text-slate-400 mt-1 max-w-sm">${BRAND.description}</p>
+            </div>
+            <div class="text-xs text-slate-400 font-mono">
+              © 2026 ${BRAND.name}. All rights reserved. • "${BRAND.tagline}"
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+
+    function mountApp() {
+      const app = document.getElementById('app');
+      app.innerHTML = `
+        ${renderNavbar()}
+        <div id="pageView">
+          ${renderHero()}
+          ${renderTrending()}
+          ${renderGadgetDeck()}
+        </div>
+        ${renderFooter()}
+
+        <!-- Global Modals -->
+        <div id="articleModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+          <div class="relative w-full max-w-3xl max-h-[90vh] rounded-3xl glass-panel p-6 sm:p-8 border border-white/20 shadow-2xl overflow-y-auto bg-[#101426]">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+              <span id="artCategory" class="badge-pill bg-[#287BFF] text-white text-[10px]">CATEGORY</span>
+              <button id="btnCloseArticle" class="p-2 text-slate-400 hover:text-white">✕</button>
+            </div>
+            <h2 id="artTitle" class="text-2xl font-bold text-white mb-2"></h2>
+            <div id="artMeta" class="text-xs font-mono text-slate-400 mb-6"></div>
+            <div class="w-full h-64 rounded-2xl overflow-hidden mb-6">
+              <img id="artImage" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <div id="artBody" class="article-body"></div>
+          </div>
+        </div>
+
+        <div id="compareModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+          <div class="relative w-full max-w-4xl max-h-[90vh] rounded-3xl glass-panel p-6 sm:p-8 border border-white/20 shadow-2xl overflow-y-auto bg-[#101426]">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+              <h3 class="text-xl font-bold text-white">HARDWARE COMPARISON LAB</h3>
+              <button id="btnCloseCompare" class="p-2 text-slate-400 hover:text-white">✕</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs font-mono">
+                <thead>
+                  <tr class="border-b border-white/10 text-white">
+                    <th class="py-3 px-3">Device</th>
+                    <th class="py-3 px-3">iPhone 16 Pro Max</th>
+                    <th class="py-3 px-3">Galaxy S25 Ultra</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5 text-slate-300">
+                  <tr><td class="py-3 px-3 text-slate-500">Chip</td><td class="py-3 px-3">A18 Pro (3nm)</td><td class="py-3 px-3">Snapdragon 8 Elite</td></tr>
+                  <tr><td class="py-3 px-3 text-slate-500">Display</td><td class="py-3 px-3">6.9" LTPO OLED (2000 nits)</td><td class="py-3 px-3">6.8" AMOLED 2X (2600 nits)</td></tr>
+                  <tr><td class="py-3 px-3 text-slate-500">Lab Score</td><td class="py-3 px-3 text-emerald-400 font-bold">9.6 / 10</td><td class="py-3 px-3 text-emerald-400 font-bold">9.5 / 10</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Event handlers
+      document.addEventListener('click', (e) => {
+        const artBtn = e.target.closest('.btn-open-article');
+        if (artBtn) {
+          const id = artBtn.getAttribute('data-article-id') || 'art-1';
+          const art = ARTICLES.find(a => a.id === id) || ARTICLES[0];
+          document.getElementById('artCategory').textContent = art.category;
+          document.getElementById('artTitle').textContent = art.title;
+          document.getElementById('artMeta').textContent = `${art.author.name} • ${art.date} • ${art.readTime}`;
+          document.getElementById('artImage').src = art.image;
+          document.getElementById('artBody').innerHTML = art.content;
+          document.getElementById('articleModal').classList.remove('hidden');
+        }
+
+        if (e.target.closest('#btnCloseArticle')) {
+          document.getElementById('articleModal').classList.add('hidden');
+        }
+
+        if (e.target.closest('#btnLaunchCompareModal') || e.target.closest('.btn-add-compare')) {
+          document.getElementById('compareModal').classList.remove('hidden');
+        }
+
+        if (e.target.closest('#btnCloseCompare')) {
+          document.getElementById('compareModal').classList.add('hidden');
+        }
+
+        if (e.target.closest('#btnToggleTheme')) {
+          document.documentElement.classList.toggle('light');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', mountApp);
+  </script>
+</body>
+</html>
