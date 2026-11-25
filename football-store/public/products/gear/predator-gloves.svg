@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="gearBg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stopColor="#1B2920" stopOpacity="0.9"/>
+      <stop offset="100%" stopColor="#080A08" stopOpacity="1"/>
+    </radialGradient>
+    <filter id="gearShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" floodColor="#000000" floodOpacity="0.9"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="32" fill="url(#gearBg)"/>
+
+  <!-- Pedestal -->
+  <ellipse cx="300" cy="460" rx="180" ry="30" fill="#FF2A2A" opacity="0.2"/>
+
+  <!-- Big Central Icon / Graphical Illustration -->
+  <g transform="translate(180, 120)" filter="url(#gearShadow)">
+    <rect width="240" height="260" rx="36" fill="#121214" stroke="#FF2A2A" stroke-width="4"/>
+    <circle cx="120" cy="110" r="70" fill="#FF2A2A" opacity="0.2"/>
+    <text x="120" y="135" textAnchor="middle" fontSize="72">🧤</text>
+    <rect x="40" y="200" width="160" height="28" rx="8" fill="#1F1F23" stroke="#333" stroke-width="1"/>
+    <text x="120" y="219" textAnchor="middle" fill="#00FF66" fontSize="12" fontWeight="900" font-family="Arial">PRO MATCH GRADE</text>
+  </g>
+
+  <!-- Product Label -->
+  <g transform="translate(0, 500)">
+    <rect x="50" y="0" width="500" height="60" rx="16" fill="#121214" stroke="#27272A" stroke-width="1"/>
+    <text x="300" y="28" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontWeight="900" letter-spacing="1" font-family="Arial, sans-serif">
+      ADIDAS PREDATOR PRO GOALKEEPER GLOVES
+    </text>
+    <text x="300" y="48" textAnchor="middle" fill="#00FF66" fontSize="12" fontWeight="700" letter-spacing="2" font-family="Arial, sans-serif">
+      URG 1.0 STICKY LATEX + FINGERSAVE
+    </text>
+  </g>
+</svg>

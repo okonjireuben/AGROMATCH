@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bootGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stopColor="#17261E" stopOpacity="0.9"/>
+      <stop offset="100%" stopColor="#080908" stopOpacity="1"/>
+    </radialGradient>
+    <filter id="bootDropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#000000" floodOpacity="0.9"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="32" fill="url(#bootGlow)"/>
+
+  <!-- High-Tech Stadium Pedestal -->
+  <ellipse cx="300" cy="460" rx="220" ry="40" fill="#00FF66" opacity="0.12"/>
+  <ellipse cx="300" cy="455" rx="190" ry="25" fill="#18181B" stroke="#27272A" stroke-width="2"/>
+
+  <!-- Boot Silhouette (Professional Dynamic Profile) -->
+  <g transform="translate(70, 160)" filter="url(#bootDropShadow)">
+    <!-- Soleplate & Studs (FG/AG Cleats) -->
+    <path d="M 50 250 L 410 245 C 430 240, 440 215, 430 200 L 410 210 L 40 220 Z" fill="#1E1E24" stroke="#111" stroke-width="2"/>
+    
+    <!-- Studs -->
+    <polygon points="65,248 80,248 72,280" fill="#FFFFFF"/>
+    <polygon points="120,248 135,248 127,280" fill="#FFFFFF"/>
+    <polygon points="260,247 275,247 268,280" fill="#FFFFFF"/>
+    <polygon points="320,246 335,246 328,280" fill="#FFFFFF"/>
+    <polygon points="380,245 395,245 388,278" fill="#FFFFFF"/>
+
+    <!-- Boot Upper Body -->
+    <path d="M 70 240 
+             C 40 180, 50 120, 80 80 
+             C 105 50, 130 50, 150 90 
+             L 190 130 
+             C 250 140, 320 150, 380 180 
+             C 430 205, 440 230, 400 240 Z" 
+          fill="#FF2A85" stroke="#000" stroke-width="3"/>
+
+    <!-- High Dynamic Sock Collar (Dynamic Fit) -->
+    <path d="M 80 80 C 70 50, 95 30, 125 35 C 145 40, 150 70, 150 90 Z" fill="#111111" stroke="#FFFFFF" stroke-width="1.5"/>
+
+    <!-- Lacing System & Tongue Area -->
+    <path d="M 140 100 L 250 150" stroke="#000" stroke-width="6" stroke-dasharray="8 6"/>
+
+    <!-- Iconic Brand Graphic Swoosh / Stripes on Flank -->
+    
+      <!-- Nike Swoosh -->
+      <path d="M 170 190 Q 250 215 320 170 Q 260 210 170 190 Z" fill="#FFFFFF" stroke="#000" stroke-width="1"/>
+    
+
+    <!-- Gripknit / Strikeskin 3D Micro-texture Ribs -->
+    <path d="M 280 180 Q 320 195 360 190" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.8"/>
+    <path d="M 290 195 Q 330 210 370 205" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.8"/>
+  </g>
+
+  <!-- Product Label -->
+  <g transform="translate(0, 520)">
+    <rect x="50" y="0" width="500" height="50" rx="16" fill="#121214" stroke="#27272A" stroke-width="1"/>
+    <text x="300" y="32" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontWeight="900" letter-spacing="1" font-family="Arial, sans-serif">
+      NIKE PHANTOM LUNA II ELITE FG
+    </text>
+  </g>
+</svg>

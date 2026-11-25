@@ -1,3 +1,57 @@
+# REUBEN MULTI-PROJECT REPOSITORY
+
+This repository contains two independent, production-ready web applications:
+
+1. 🌾 **AGROMATCH** — Agricultural Marketplace & Direct Farm-to-Business Network (Root directory)
+2. ⚽ **REUBEN FOOTBALL STORE** — Official Premium Football Apparel & Equipment Store ([`football-store/`](./football-store/))
+
+---
+
+## 📂 Repository Structure
+
+```
+├── football-store/                   # REUBEN FOOTBALL STORE (Standalone App)
+│   ├── public/products/              # 41 100% accurate vector product assets (jerseys, boots, balls, gear)
+│   ├── src/
+│   │   ├── components/               # JerseyCustomizer, Navbar, Footer, ProductDetailModal, etc.
+│   │   ├── context/                  # AppContext (cart, wishlist, currency, search)
+│   │   ├── data/footballData.js      # 28 club & nation kits, boots, balls, equipment
+│   │   └── pages/                    # HomePage, JerseysPage, BootsPage, EquipmentPage, etc.
+│   ├── package.json
+│   ├── vite.config.js
+│   └── README.md
+│
+├── src/                              # AGROMATCH APPLICATION (Root App)
+│   ├── components/                   # Navbar, Footer, ProductCard, AuthModal, etc.
+│   ├── context/                      # AppContext (escrow, produce cart, farmer state)
+│   ├── data/mockData.js              # Produce catalog, Nigerian states, farmers, logistics
+│   └── pages/                        # FarmerDashboard, BuyerDashboard, MarketplacePage, etc.
+│
+├── package.json                      # Workspace root scripts
+└── README.md
+```
+
+---
+
+## 🚀 Running Either Project
+
+### 🌾 To Run AGROMATCH (Root Project)
+```bash
+npm run dev
+# Running on http://localhost:5173
+```
+
+### ⚽ To Run REUBEN FOOTBALL STORE
+```bash
+npm run dev:football
+# Or navigate to the folder:
+cd football-store
+npm run dev
+# Running on http://localhost:3001
+```
+
+---
+
 # AGROMATCH — Agricultural Marketplace & Direct Farm-to-Business Network
 
 > **Connecting Farms to Markets. Growing Opportunities.**  
